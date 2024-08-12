@@ -4,27 +4,28 @@ import { countries } from '../../db/schema';
 import * as trpcExpress from '@trpc/server/adapters/express';
 import * as trpc from '@trpc/server';
 import { db } from '../db/db';
+import { CreateNextContextOptions } from '@trpc/server/adapters/next';
+import { createContext } from '../context';
 
-// created for each request
-export const createContext = ({
-    req,
-    res,
-  }: trpcExpress.CreateExpressContextOptions) => {return {}} // no context
-  
-  type Context = trpc.inferAsyncReturnType<typeof createContext>;
-  const t = initTRPC.context<Context>().create();
+type Context = trpc.inferAsyncReturnType<typeof createContext>;
+const t = initTRPC.context<Context>().create();
 
 export const appRouter = t.router({
-    getCountry: t.procedure.query(async (opts) => {
+    getCountry: t.procedure.query(async ({input, ctx}) => {
       const result = await db.select().from(countries)
       console.log(result)
+      console.log(ctx)
+     
       return result;
     }),
+
     createCountry: t.procedure
       .input(z.object({ name: z.string() }))
       .mutation(async (opts) => {
         await db.insert(countries).values(opts.input);
       }),
+
+      
   });
 
 // export type definition of API

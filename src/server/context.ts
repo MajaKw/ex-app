@@ -5,6 +5,6 @@ import * as trpc from '@trpc/server';
 export const createContext = ({
     req,
     res,
-  }: trpcExpress.CreateExpressContextOptions) => {return {}} // no context
+  }: trpcExpress.CreateExpressContextOptions) => {return {lol:""}} // no context
   
-  export type Context = trpc.inferAsyncReturnType<typeof createContext>;
+export type Context = trpc.inferAsyncReturnType<typeof createContext>;
