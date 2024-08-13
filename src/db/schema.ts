@@ -1,4 +1,4 @@
-import { integer, pgEnum, pgTable, serial, uniqueIndex, varchar } from 'drizzle-orm/pg-core';
+import { integer, pgEnum, pgTable, serial, uniqueIndex, varchar, numeric } from 'drizzle-orm/pg-core';
 
 // declaring enum in database
 export const popularityEnum = pgEnum('popularity', ['unknown', 'known', 'popular']);
@@ -17,4 +17,11 @@ export const cities = pgTable('cities', {
   name: varchar('name', { length: 256 }),
   countryId: integer('country_id').references(() => countries.id),
   popularity: popularityEnum('popularity'),
+});
+
+export const users = pgTable('users', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 256 }),
+  surname: varchar('surname', {length: 256}),
+  pesel: numeric('pesel', { precision: 11 }),
 });
