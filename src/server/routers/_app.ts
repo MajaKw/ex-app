@@ -6,31 +6,23 @@ import * as trpc from '@trpc/server';
 import { db } from '../db/db';
 import { CreateNextContextOptions } from '@trpc/server/adapters/next';
 import { createContext } from '../context';
-import { postRouter } from './post';
-import { getRouter } from './get';
+import { citiesRouter } from './cities';
+import { countriesRouter } from './countries';
+import { usersRouter } from './users';
 import { publicProcedure, router } from '../trpc'
+import { mergeRouters } from '@trpc/server/unstable-core-do-not-import';
 
 
 // type Context = trpc.inferAsyncReturnType<typeof createContext>;
 // const t = initTRPC.context<Context>().create();
 
-export const appRouter = router({
-   post: postRouter,
-   get: getRouter,
-   country: publicProcedure
-   .input(z.object({ name: z.string() }))
-   .mutation(async (opts) => {
-     await db.insert(countries).values(opts.input);
-     console.log(opts.input)   }),
+export const appRouter = mergeRouters(countriesRouter, citiesRouter);
 
-    dodaj: {
-      country: publicProcedure.input(z.object({ name: z.string() }))
-      .mutation(async (opts) => {
-        await db.insert(countries).values(opts.input);
-        console.log(opts.input)   }),
-    }
+// const appRouter = router({
+//     users: usersRouter,
+//     cities: citiesRouter,
+// })
 
-  });
 
 // export type definition of API
 export type AppRouter = typeof appRouter;
