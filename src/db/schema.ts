@@ -3,25 +3,16 @@ import { integer, pgEnum, pgTable, serial, uniqueIndex, varchar, numeric } from 
 // declaring enum in database
 export const popularityEnum = pgEnum('popularity', ['unknown', 'known', 'popular']);
 
-export const countries = pgTable('countries', {
-  id: serial('id').primaryKey(),
-  name: varchar('name', { length: 256 }),
-}, (countries) => {
-  return {
-    nameIndex: uniqueIndex('name_idx').on(countries.name),
-  }
+
+
+export const users = pgTable('users',{
+  id: serial('user_id').primaryKey(),
+  email: varchar('email', {length: 256}).unique(),
+  username: varchar('username', {length: 256}).unique(),
 });
 
-export const cities = pgTable('cities', {
+export const tasks = pgTable('tasks', {
   id: serial('id').primaryKey(),
-  name: varchar('name', { length: 256 }),
-  countryId: integer('country_id').references(() => countries.id),
-  popularity: popularityEnum('popularity'),
-});
-
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: varchar('name', { length: 256 }),
-  surname: varchar('surname', {length: 256}),
-  pesel: numeric('pesel', { precision: 11 }),
-});
+  name: varchar('name', {length: 256}).unique(),
+  taskId: integer('task_id').references(() => users.id)
+})

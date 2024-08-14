@@ -1,6 +1,7 @@
 type User = { id: string; name: string };
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from 'pg';
+import * as schema from "../../db/schema"
 
 // or
 console.log({
@@ -19,4 +20,4 @@ const client = new pg.Client({
   });
   console.log("das")
   await client.connect();
-  export const db = drizzle(client);
+  export const db = drizzle(client, {schema});
