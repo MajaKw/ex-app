@@ -1,12 +1,11 @@
-import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
+import { checkRole } from '@/src/utils/meta'
 
 export default function AdminDashboard() {
-    const { sessionClaims } = auth()
 
-    if (sessionClaims?.metadata.role !== 'admin'){
+    if (!checkRole('admin')) {
         redirect('/')
-    }
+      }
 
     return(
         <>

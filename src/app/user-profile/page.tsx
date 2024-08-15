@@ -1,4 +1,4 @@
- function UserProfile(){
+function UserProfile(){
     return <div>Welcome in UserProfile</div>
 }
 

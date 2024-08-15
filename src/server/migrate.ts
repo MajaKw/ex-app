@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
-import { db, client } from './server/db/db';
+import { db, client } from '../server/db/db';
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from 'pg';
 
