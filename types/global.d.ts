@@ -1,6 +1,7 @@
 export {}
 
 export type Roles = 'admin' | 'moderator'
+// export type Subsription = boolean
 
 declare global {
   interface CustomJwtSessionClaims {

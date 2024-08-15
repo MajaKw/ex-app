@@ -3,6 +3,7 @@
 
 # drizzle
 drizzle.config.json
+drizzle.config.ts
 
 # dependencies
 /node_modules
