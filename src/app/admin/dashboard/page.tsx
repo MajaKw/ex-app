@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { checkRole } from '@/src/utils/meta'
+import { checkRole } from '@/src/utils/clerk'
 
 export default function AdminDashboard() {
 

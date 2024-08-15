@@ -7,4 +7,7 @@ export const checkRole = (role: Roles) => {
     return sessionClaims?.metadata.role === role
 }
 
-export const check
+export const checkSubscription = () => {
+    const { sessionClaims } = auth()
+    return sessionClaims?.metadata.subscription === true
+}
