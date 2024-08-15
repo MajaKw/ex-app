@@ -1,11 +1,26 @@
+'use client'
+
 export default function UserProfile(){
     return (
         <div>
             <div>Your toDo list:</div>
-            <ul>
-            
-            </ul>
+            <AddTaskButton/>
         </div>
+    )
+}
+
+function AddTaskButton(){
+    function handleClick(){
+        alert('You clicked button AddTask')
+    }
+
+
+    return(
+       <div>
+            <label >Add task to Your list</label><br/>
+            <input type="text"/><br/>
+            <input type="submit" value="Submit" onClick={handleClick}/>
+       </div>
     )
 }
 
