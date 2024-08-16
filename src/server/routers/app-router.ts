@@ -5,13 +5,13 @@
 // import { db } from '../db/db';
 // import { CreateNextContextOptions } from '@trpc/server/adapters/next';
 // import { createContext } from '../context';
-// import { usersRouter } from './users';
+import { usersRouter } from './users';
 import { publicProcedure, router } from '../init'
 
 
 export const appRouter = router({
     greeting: publicProcedure.query(() => 'hello tRPC v10!'),
-        // users: usersRouter,
+    users: usersRouter,
 
 })
 

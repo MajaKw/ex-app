@@ -10,7 +10,11 @@ export const usersRouter = router ({
         console.log(result);
         return result;
     }),
-    add: publicProcedure.mutation(async() => {
-        await db.insert(users).values({id: "user_29w83sxmDNGwOuEthce5gg56FcC" })
-    })
+    add: publicProcedure.input(z.object({
+        id: z.string(), // Ensure that the ID is a string
+      }))
+      .mutation(async ({ input }) => {
+        console.log("Adding user with ID:", input.id);
+        await db.insert(users).values({ id: input.id });
+      }),
 })
