@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1723452797982,
-      "tag": "0000_little_hellion",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1723560248833,
-      "tag": "0001_huge_purple_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1723630528214,
-      "tag": "0002_early_psylocke",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1723630592882,
-      "tag": "0003_unknown_sunset_bain",
+      "when": 1723829847903,
+      "tag": "0000_loving_gauntlet",
       "breakpoints": true
     }
   ]
