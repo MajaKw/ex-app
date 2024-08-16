@@ -1,8 +1,11 @@
 'use client'
 
+import { SignOutButton } from "@clerk/nextjs"
+
 export default function UserProfile(){
     return (
         <div>
+            <SignOutButton />
             <div>Your toDo list:</div>
             <AddTaskButton/>
         </div>

@@ -1,22 +1,13 @@
-'use client'
-import { trpc } from '@/src/utils/trpc';
-import { ClerkProvider, SignedIn, SignOutButton } from '@clerk/nextjs';
+import { ClerkProvider, SignInButton, SignOutButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
-export default trpc.withTRPC(function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <ClerkProvider>
+    <ClerkProvider>
+      <html lang="en">
         <body>
-          <SignedIn>
-            <SignOutButton />
-          </SignedIn>
-          {children}
+          <main>{children}</main>
         </body>
-      </ClerkProvider>
-    </html>
+      </html>
+    </ClerkProvider>
   )
-});
+}
