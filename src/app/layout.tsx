@@ -1,6 +1,6 @@
 'use client'
 import { trpc } from '@/src/utils/trpc';
-import { ClerkProvider } from '@clerk/nextjs';
+import { ClerkProvider, SignedIn, SignOutButton } from '@clerk/nextjs';
 
 export default trpc.withTRPC(function RootLayout({
   children,
@@ -10,7 +10,12 @@ export default trpc.withTRPC(function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider>
-      <body>{children}</body>
+        <body>
+          <SignedIn>
+            <SignOutButton />
+          </SignedIn>
+          {children}
+        </body>
       </ClerkProvider>
     </html>
   )

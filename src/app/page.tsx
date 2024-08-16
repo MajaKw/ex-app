@@ -8,9 +8,6 @@ export default function Page() {
             <SignInButton />
             <SignUpButton />
           </SignedOut>
-          <SignedIn>
-            <SignOutButton />
-          </SignedIn>
     </>
   )
 }

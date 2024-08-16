@@ -1,7 +1,7 @@
 type User = { id: string; name: string };
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from 'pg';
-import * as schema from "@src/db/schema"
+import * as schema from "@/src/db/schema"
 
 // or
 // console.log({
