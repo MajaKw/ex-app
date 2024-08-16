@@ -1,5 +1,5 @@
 {
-  "id": "85fa9781-f45f-4b40-9390-49ff64fa4086",
+  "id": "a4a3bdf6-320b-4209-b7a1-9268ac9b6e93",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,31 +10,25 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
         },
         "name": {
           "name": "name",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
-        },
-        "task_id": {
-          "name": "task_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "tasks_task_id_users_id_fk": {
-          "name": "tasks_task_id_users_id_fk",
+        "tasks_id_users_id_fk": {
+          "name": "tasks_id_users_id_fk",
           "tableFrom": "tasks",
           "tableTo": "users",
           "columnsFrom": [
-            "task_id"
+            "id"
           ],
           "columnsTo": [
             "id"
@@ -60,42 +54,15 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "varchar",
           "primaryKey": true,
           "notNull": true
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "username": {
-          "name": "username",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "users_email_unique": {
-          "name": "users_email_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
-        },
-        "users_username_unique": {
-          "name": "users_username_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "username"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     }
   },
   "enums": {},

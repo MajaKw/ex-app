@@ -9,5 +9,8 @@ export const usersRouter = router ({
         const result = await db.select().from(users);
         console.log(result);
         return result;
+    }),
+    add: publicProcedure.mutation(async() => {
+        await db.insert(users).values({id: "user_29w83sxmDNGwOuEthce5gg56FcC" })
     })
 })
