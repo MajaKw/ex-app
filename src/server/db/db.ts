@@ -10,6 +10,5 @@ export const client = new pg.Client({
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
   });
-  console.log("das")
 await client.connect();
 export const db = drizzle(client, { schema });

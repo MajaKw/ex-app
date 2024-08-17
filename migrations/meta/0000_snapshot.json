@@ -1,5 +1,5 @@
 {
-  "id": "d46a4019-6ff4-42ec-9e01-257a56a2080e",
+  "id": "02606b39-ad20-4765-8979-bce1a8f28655",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,25 +10,31 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
         },
         "name": {
           "name": "name",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "tasks_id_users_id_fk": {
-          "name": "tasks_id_users_id_fk",
+        "tasks_user_id_users_id_fk": {
+          "name": "tasks_user_id_users_id_fk",
           "tableFrom": "tasks",
           "tableTo": "users",
           "columnsFrom": [
-            "id"
+            "user_id"
           ],
           "columnsTo": [
             "id"

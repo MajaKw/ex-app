@@ -1,11 +1,14 @@
 'use client'
 
+import { trpc } from '@/src/utils/trpc'
 import { SignOutButton } from "@clerk/nextjs"
 
 export default function UserProfile(){
+    const email = trpc.users.email.useQuery();
     return (
         <div>
             <SignOutButton />
+            <p>Your email is: {email.data}</p>
             <div>Your toDo list:</div>
             <AddTaskButton/>
         </div>
