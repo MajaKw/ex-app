@@ -2,6 +2,7 @@ import { router, publicProcedure } from '@/src/server/init'
 import { z } from 'zod';
 import { db } from '@/src/server/db/db'
 import { users } from '@/src/db/schema'
+import { currentUser, EmailAddress } from '@clerk/nextjs/server'
 
 
 export const usersRouter = router ({
@@ -17,4 +18,12 @@ export const usersRouter = router ({
         console.log("Adding user with ID:", input.id);
         await db.insert(users).values({ id: input.id });
       }),
+    email: publicProcedure.query(async () => {
+        const user = await currentUser();
+        console.log("trying to get email of user_id: ", user?.id)
+        const firstEmail = user?.emailAddresses[0].emailAddress;
+        console.log("email: ", firstEmail)
+    
+        return firstEmail;
+    })
 })
