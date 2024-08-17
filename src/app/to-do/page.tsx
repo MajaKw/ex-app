@@ -28,20 +28,21 @@ export default function ToDo() {
         }
     }, [setTasksList, status])
 
-    const userData = useUser();
-    console.log(userData)
+    const { user } = useUser();
+    const publicMetadata = user?.publicMetadata;
+    console.log("user-subscription: ", publicMetadata?.subscription)
 
     async function handleAddTask() {
         if (newTask.trim() === '') {
             alert('Task cannot be empty');
             return;
         }
-        if(tasksList.length >= 20 ){
+        console.log(tasksList.length)
+        if(tasksList.length >= 3 && !publicMetadata?.subscription){
             alert( "You don't have subscription! " )
         }else{
             console.log(tasksList.length)
             mutation.mutate({title: newTask});
-            
             setNewTask(''); 
         }
     }
