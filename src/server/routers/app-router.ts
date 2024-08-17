@@ -7,12 +7,13 @@
 // import { createContext } from '../context';
 import { usersRouter } from './users';
 import { publicProcedure, router } from '../init'
+import { tasksRouter } from './tasks';
 
 
 export const appRouter = router({
     greeting: publicProcedure.query(() => 'hello tRPC v10!'),
     users: usersRouter,
-
+    tasks: tasksRouter,
 })
 
 console.log("app-router")

@@ -2,7 +2,7 @@ import { router, publicProcedure } from '@/src/server/init'
 import { z } from 'zod';
 import { db } from '@/src/server/db/db'
 import { users } from '@/src/db/schema'
-import { currentUser, EmailAddress } from '@clerk/nextjs/server'
+import { currentUser } from '@clerk/nextjs/server'
 
 
 export const usersRouter = router ({

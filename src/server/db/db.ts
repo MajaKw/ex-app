@@ -12,3 +12,6 @@ export const client = new pg.Client({
   });
 await client.connect();
 export const db = drizzle(client, { schema });
+
+console.log("db")
+// await db.insert(schema.tasks).values({ title: "To pierwszy dodany task !!!!", userId: "user_2kn7I17uFtEL9SufHwIM8p7I7jE"});

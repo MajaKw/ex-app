@@ -11,4 +11,4 @@ export const tasks = pgTable('tasks', {
   userId: varchar('user_id').references(() => users.id) 
 });
 
-
+console.log("schema")

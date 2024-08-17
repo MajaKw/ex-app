@@ -1,6 +1,6 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
-import { WebhookEvent } from '@clerk/nextjs/server'
+import { clerkClient, WebhookEvent } from '@clerk/nextjs/server'
 
 import { db } from '@/src/server/db/db'
 import { users } from '@/src/db/schema'
@@ -60,13 +60,28 @@ export async function POST(req: Request) {
   if (evt.type === 'user.created') {
     console.log("#################################")
     const userId = evt.data.id;
-    console.log('userId:', userId)
+
+    console.log('userId 1:', userId)
+    let allUsers = await db.select({id: users.id}).from(users);
+    console.log("ALL USERS IN DB 1:");
+    allUsers.forEach(user => {
+        console.log('FROM DB User ID 1:', user.id);
+    });
+
     await db.insert(users).values({ id: userId })
-    const allUsers = await db.select({id: users.id}).from(users);
-    console.log("ALL USERS IN DB:");
+   
+    await clerkClient().users.updateUserMetadata(userId, {
+      publicMetadata: {
+        role: "moderator",
+        subscription: false,
+      }
+    })
+    allUsers = await db.select({id: users.id}).from(users);
+    console.log("ALL USERS IN DB 2:");
     allUsers.forEach(user => {
         console.log('User ID:', user.id);
     });
+   
     console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
   }
   
