@@ -6,7 +6,7 @@ import Stripe from "stripe";
 
 
 export async function POST(req: Request) {
-  console.log("###################### stripe webhook #######################################33")
+  console.log("###################### stripe webhook ##################################")
     const body = await req.text();
     const signature = headers().get("Stripe-Signature");
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;

@@ -6,7 +6,7 @@ import { db } from '@/src/server/db/db'
 import { users } from '@/src/db/schema'
 
 export async function POST(req: Request) {
-  console.log("clerk webhook")
+  console.log("################################# clerk webhook ########################################")
 
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
