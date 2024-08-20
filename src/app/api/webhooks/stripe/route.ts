@@ -6,7 +6,6 @@ import Stripe from "stripe";
 
 
 export async function POST(req: Request) {
-  console.log("###################### stripe webhook ##################################")
     const body = await req.text();
     const signature = headers().get("Stripe-Signature");
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -24,18 +23,19 @@ export async function POST(req: Request) {
       if (event?.type === "checkout.session.completed") {
         const session = event.data.object;
         const stripeId = session.subscription;
+        
         const userId = session.metadata?.userId!;
-        console.log("stripeID: ", stripeId)
+        
         await clerkClient().users.updateUserMetadata(userId, {
-            privateMetadata: {
-               stripeId: stripeId,
-            }
-          })
-          await clerkClient().users.updateUserMetadata(userId, {
-            publicMetadata: {
-               subscription: true,
-            }
-          })
+          privateMetadata: {
+              stripeId: stripeId,
+          }
+        })
+        await clerkClient().users.updateUserMetadata(userId, {
+          publicMetadata: {
+              subscription: true,
+          }
+        })
       }
       return new NextResponse(null, { status: 200 });
     } catch {

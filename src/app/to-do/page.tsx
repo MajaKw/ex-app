@@ -5,17 +5,18 @@ import { SignOutButton } from "@clerk/nextjs"
 import { useEffect, useState } from 'react';
 import { useUser } from '@clerk/clerk-react'
 
+interface Task {
+    title: string | null,
+    id: number
+}
 
 export default function ToDo() {
     const { data: email } = trpc.users.email.useQuery();
     const { data: initialTasks = [], status } = trpc.tasks.all.useQuery();
     console.log(initialTasks)
-    const [tasksList, setTasksList] = useState<{
-        id: number;
-        title: string | null;
-    }[]>([]);
+    const [tasksList, setTasksList] = useState<Task[]>([]);
     const [newTask, setNewTask] = useState('');
-    const mutation = trpc.tasks.add.useMutation({onSuccess: (task)=>{
+    const taskMutation = trpc.tasks.add.useMutation({onSuccess: (task: Task[])=>{
         console.log(task)
         setTasksList([
             ...tasksList,
@@ -26,11 +27,10 @@ export default function ToDo() {
         if (status==="success"){
             setTasksList(initialTasks)
         }
-    }, [setTasksList, status])
+    }, [setTasksList, [status]])
 
     const { user } = useUser();
-    const publicMetadata = user?.publicMetadata;
-    console.log("user-subscription: ", publicMetadata?.subscription)
+    const publicMetadata = user?.publicMetadata!;
 
     async function handleAddTask() {
         if (newTask.trim() === '') {
@@ -38,11 +38,11 @@ export default function ToDo() {
             return;
         }
         console.log(tasksList.length)
-        if(tasksList.length >= 3 && !publicMetadata?.subscription){
-            alert( "You don't have subscription! " )
+        if(tasksList.length >= 3 && !publicMetadata.subscription){
+            window.open('http://localhost:3000/stripe','Buy subscription','width=700,height=700');
         }else{
             console.log(tasksList.length)
-            mutation.mutate({title: newTask});
+            taskMutation.mutate({title: newTask});
             setNewTask(''); 
         }
     }

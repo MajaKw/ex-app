@@ -53,7 +53,5 @@ export const clerkRouter = router ({
             })
         }
 
-
-        
     })
 });
