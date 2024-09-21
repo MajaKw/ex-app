@@ -4,9 +4,6 @@ import { google } from 'googleapis'
 
 export async function GET(req: Request) {
 'use server'
-
-    console.log("sjioi2woi2wjo")
-
   try {
     const { userId } = auth()
     if (!userId) {
@@ -32,20 +29,17 @@ export async function GET(req: Request) {
       headers: { Authorization: `Bearer ${token}` },
     })
 
-    const newEvent = {
-      'summary': 'New Event',
-      'description': 'Messing around iwth google calendar',
-      'start': {
-        'dateTime': '2024-09-15T22:30:00',
+    const event = {
+      summary: 'New Event',
+      description: 'Messing around iwth google calendar',
+      start: {
+        'dateTime': '2024-09-21T22:30:00',
         'timeZone': 'Europe/Warsaw',
       },
-      'end': {
-        'dateTime': '2024-09-15T23:00:00',
-        'timeZone': 'Europe/Warsaw',
+      end: {
+        dateTime: '2024-09-21T23:00:00',
+        timeZone: 'Europe/Warsaw',
       },
-      'recurrence': [
-        'RRULE:FREQ=DAILY;COUNT=2'
-      ],
     };
 
     var res = null
@@ -53,19 +47,8 @@ export async function GET(req: Request) {
       console.log("before insert")
       res = await calendar.events.insert({
         calendarId: 'primary',
-        requestBody: {
-          summary: 'New Event',
-          start: {
-            dateTime: '2024-09-21T22:30:00+02:00',
-            timeZone: 'Europe/Warsaw',
-          },
-          end: {
-            dateTime: '2024-09-21T23:00:00+02:00',
-            timeZone: 'Europe/Warsaw',
-          },
-        }
+        requestBody: event
       });
-      // console.log('Event created: %s', res.data.htmlLink);
     } catch (err) {
       console.error('There was an error contacting the Calendar service: ', err);
     }
@@ -96,7 +79,6 @@ export async function GET(req: Request) {
 
 
   } catch (error) {
-    console.log('[GMAIL ERROR]', error)
     return new NextResponse('Internal error', { status: 500 })
   }
 }
